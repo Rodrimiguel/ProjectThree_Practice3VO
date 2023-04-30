@@ -1,0 +1,37 @@
+﻿@page
+@model TestProject_Practice3VOriginal.Pages.MovieDetailModel
+@{
+}
+
+<!--  -->
+<h3>@Model.MovieDetail.Name</h3> <!-- NOMBRE DE LA PELICULA -->
+
+<div>
+    <span>Duracion: </span>
+    <span>@Model.MovieDetail.Minutes</span><span> minutos.</span> <!-- MINUTOS DE LA PELICULA  -->
+</div>
+<div>
+    <span>Categoria: </span>
+    <span>@Model.MovieDetail.Category</span> <!-- CATEGORIA DE PELICULA -->
+</div>
+
+<!-- SI NO ES NULO O VACIO EN REVIEW VAMOS A MOSTRAR ESTO. SINO NO LO MOSTRAMOSS -->
+@if (!string.IsNullOrEmpty(Model.MovieDetail.Review))
+{
+    <div>
+        <span>Review: </span>
+        <span>@Model.MovieDetail.Review</span>
+    </div>
+}
+
+
+<!--MOVIE DETAIL CODE QUE PELICULA VAMOS A BORRAR  -->
+<form
+    method="post"
+    asp-page-handler="delete"
+    asp-route-code="@Model.MovieDetail.Code"
+    onsubmit="return confirm('Estas seguro de eliminar esta pelicula?')">
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <!--BOTON DEL TIPO SUBMIT PARA QUE EJECUTE EL FORM Y ME ENVIE LOS DATOS -->
+</form>
+

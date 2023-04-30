@@ -1,0 +1,90 @@
+﻿@page
+@model IndexModel // 11. ACORDARSE QUE EN EL HTML (COMO LE ESTAMOS PASANDO TODO EL MODELO) INDEXMODEL) ESTAN VINIENDO TODAS LAS PROPIEDADES. (VAN A VIAJAR Y MAPEAR CON EL HTML)
+@{                                                                                  // DESPUES PONEMOS MODEL.XXXXXXXX LO QUE NECESITAMOS PARA HACER ALGO.
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Películas</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">Top Películas</a>.</p>
+</div>
+
+
+
+
+<ul>
+    @foreach (var item in Model.MovieList) // enlace link de cada pelicula, entra y me muestra sus propiedades DURACION, CATEGORIA, REVIEW.
+    {
+        <li><a asp-page="MovieDetail" asp-route-code="@item.Code">@item.Name</a></li> // Nos va a dirigir hacia la pagina movie detail y nos va a agregar el parametro code.
+         // MOVIEDETAIL ( ES LA QUE TIENE NUESTRO DETALLE DE PAGINA // asp-route-code )
+    }
+</ul>
+
+<!-- Debemos implementar un servicio que maneje la lógica de negocio y para tener la cuestion de acceso a datos (lista de peliculas)-->
+
+
+
+<!-- 7 Implemetamos un listado, foreach -->
+
+@* <ul>
+    
+    @foreach (var item in Model.MovieList) // 8 Tengo que llamar al modelo de la pagina y ahi tengo al acceso a las propiedades que se definio en la clase.
+    {
+            <li>@item.Name</li> // Iterar con todos los elementos (en base a su nombre)
+
+    }
+    <!--  SE HIZO UN DEBUG PARA VER COMO ENTRA EN EL SERVICIO // CON F11 LO VEMOS COMO HACE A TRAVES DEL GETALL-->
+
+</ul> *@
+
+<!-- 8 INTRODUCIR UN FORMULARIO PARA AGREGAR PELICULAS A LA LISTA -->
+
+
+<form method="post"> <!-- 13 FORMULARIO FUNCIONA CON UNA LLAMADA ON POST -->
+  <div class="mb-3">
+    <label asp-for="NewMovie.Code" class="form-label"></label>  <!-- NOMBRE EN FORMA AUTOMATICA AL MAPEAR -->
+    <input type="text" class="form-control" asp-for="NewMovie.Code"> <!-- IMPUT MAPEADO A NUESTRA PROPIEDAD CODE -->
+  </div>
+  <div class="mb-3">
+    <label asp-for="NewMovie.Name" class="form-label"></label> <!-- NOMBRE EN FORMA AUTOMATICA AL MAPEAR -->
+    <input type="text" class="form-control" asp-for="NewMovie.Name"> <!-- IMPUT MAPEADO A NUESTRA PROPIEDAD NAME -->
+  </div>
+  <div class="mb-3">
+    <label asp-for="NewMovie.Category" class="form-label"></label> <!-- NOMBRE EN FORMA AUTOMATICA AL MAPEAR -->
+    <input type="text" class="form-control" asp-for="NewMovie.Category"> <!-- IMPUT MAPEADO A NUESTRA PROPIEDAD CATEGORIA -->
+  </div>
+   <div class="mb-3">
+    <label asp-for="NewMovie.Minutes" class="form-label"></label> <!-- NOMBRE EN FORMA AUTOMATICA AL MAPEAR -->
+    <input type="number" class="form-control" asp-for="NewMovie.Minutes"> <!-- IMPUT MAPEADO A NUESTRA PROPIEDAD MINUTOS -->
+  </div>            <!-- INPUT TYPE PUESTO COMO NUMBER / HTML ME LO PONE COMO CONTROL NUMERICO -->
+   <div class="mb-3">
+    <label asp-for="NewMovie.Review" class="form-label"></label> <!-- NOMBRE EN FORMA AUTOMATICA AL MAPEAR -->
+    <textarea class="form-control" asp-for="NewMovie.Review" cols="5"></textarea> <!-- IMPUT MAPEADO A NUESTRA PROPIEDAD RESEÑA -->
+  </div>                <!-- TEXTAREA / PUEDE TENER VARIAS -->
+  <button type="submit" class="btn btn-primary">Crear</button> <!-- SE HACE LLAMADA POST Y LO CAPTURA EL ONPOST -->
+</form>
+
+
+<!-- background -->
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon">
+    <title>Images</title>
+    <style>
+        body {
+            height: 100vh;
+            background-image: url("https://lh3.googleusercontent.com/T7j0d449iN3vuIi0fHHbphpAZ1XKgN5hvWCqODQ8cvOf9sw9eq5LbW-vlbDDJbtSnSG0ofMnnweMjcZCmbOUM3LkFrVEYyhvsgbr0DdW9o5-B-g=s750");
+            color:red;
+            padding: 10px;
+            background-position: auto;
+            background-size: cover ;
+            background-position: fixed;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <h3>This web page has Background</h3>
+</body>
+</html>
